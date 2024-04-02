@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container">
+    <h1>Signup</h1>
+
+    <div class="form-container">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Nume</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="signupForm.get('name')!.invalid && signupForm.get('name')!.touched"
+        >
+          <ion-text color="danger" slot="end">
+            Numele este obligatoriu.
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+        >
+          <ion-text color="danger" slot="end"> Email is required! </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="signupForm.get('password')!.invalid && signupForm.get('password')!.touched"
+        >
+          <ion-text color="danger" slot="end">
+            The password is required!
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-input formControlName="address" type="address"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="signupForm.get('address')!.invalid && signupForm.get('address')!.touched"
+        >
+          <ion-text color="danger" slot="end">
+            The address is required!
+          </ion-text>
+        </ion-item>
+
+        <ion-button expand="block" class="main-button">Sign Up</ion-button>
+
+        <div class="sign-up">
+          Already have an account?
+          <ion-button
+            color="dark"
+            fill="clear"
+            routerLink="/login"
+            routerDirection="forward"
+            >Sign in</ion-button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

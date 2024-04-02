@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container">
+    <h1>Login</h1>
+
+    <div class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="username" type="email"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        >
+          <ion-text color="danger" slot="end">
+            Email-ul este obligatoriu.
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Parolă</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+          <ion-text color="danger" slot="end">
+            Parola este obligatorie.
+          </ion-text>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
+          Conectare
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>

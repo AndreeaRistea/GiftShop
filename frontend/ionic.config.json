@@ -1,0 +1,7 @@
+{
+  "name": "giftShop-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
