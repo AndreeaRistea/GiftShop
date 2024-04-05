@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{categoryName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products">
+      <ion-thumbnail slot="start">
+        <img [src]="'data:image/jpg;base64,' +product.Image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h1>{{ product.Name }}</h1>
+        <p>Description: {{ product.Description }}</p>
+        <p>Price: {{ product.Price }}</p>
+        <p>Stock: {{product.Stock}}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button size="small" (click)="addToCart(product.Id)"
+          >Add to Cart</ion-button
+        >
+        <ion-button size="small" (click)="addToWishlist(product.Id)"
+          >Add to Wishlist</ion-button
+        >
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

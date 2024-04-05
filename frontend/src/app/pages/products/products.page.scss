@@ -1,0 +1,14 @@
+/* Stiluri CSS pentru a face butoanele mai mici */
+ion-button {
+    font-size: 12px; /* Mărimea textului */
+    --padding-top: 4px; /* Spațiul superior */
+    --padding-bottom: 4px; /* Spațiul inferior */
+    --padding-start: 8px; /* Spațiul din stânga */
+    --padding-end: 8px; /* Spațiul din dreapta */
+  }
+  
+  /* Stiluri CSS pentru a plasa butoanele unul sub altul */
+  ion-buttons {
+    display: flex;
+    flex-direction: column;
+  }

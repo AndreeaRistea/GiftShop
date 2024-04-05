@@ -1,0 +1,16 @@
+.backbtn {
+    display: flex;
+    align-items: center; 
+    padding-left: 0; 
+}
+
+.backbtn ion-icon {
+    color: inherit; 
+    font-size: 24px;
+    margin-right: 8px; 
+}
+
+ion-toolbar {
+    --background: transparent; 
+    --border-width: 0 !important;
+}

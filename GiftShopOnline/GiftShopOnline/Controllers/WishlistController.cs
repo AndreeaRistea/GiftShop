@@ -2,6 +2,7 @@
 using GiftShopOnline.Entities;
 using GiftShopOnline.Helpers;
 using GiftShopOnline.Models.Product;
+using GiftShopOnline.Models.Wishlist;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +24,10 @@ namespace GiftShopOnline.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToWishlist(Guid productId)
+        public async Task<IActionResult> AddToWishlist([FromBody] WishlistDto wishlistDto)
         {
             var userId = _currentUser.Id;
-            var product = await _uow.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            var product = await _uow.Products.FirstOrDefaultAsync(p => p.Id == wishlistDto.ProductId);
 
             if (userId == null)
             {
@@ -39,6 +40,7 @@ namespace GiftShopOnline.Controllers
             }
 
             var wishList = await _uow.Wishlist.FirstOrDefaultAsync(w => w.User.Id ==  userId);
+
             var user = await _uow.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (wishList == null)
             {
@@ -64,17 +66,8 @@ namespace GiftShopOnline.Controllers
                 return Problem("User not found");
             }
 
-            /*var wishlist = await _uow.Wishlist.FirstOrDefaultAsync(w => w.User.Id == userId);
-
-            if (wishlist == null)
-            {
-                return NotFound();
-            }*/
-
             var wishlist = await _uow.Wishlist.Include(w => w.Products).ThenInclude(p => p.Category).
-                //ThenInclude(w => w.Category).
                                 FirstOrDefaultAsync(w => w.User.Id == userId);
-            //(w => w.User.Id == userId);.ToListAsync();
 
             if (wishlist == null)
             {
@@ -96,7 +89,6 @@ namespace GiftShopOnline.Controllers
                 CategoryName = prod.Category.CategoryName,
             }).ToList();
             return Ok(productDtos);
-            //return Ok(products);
         }
 
         [HttpDelete] 

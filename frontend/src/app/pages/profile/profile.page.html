@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="backbtn" routerLink="/home" routerDirection="back">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+      <div align="center">
+        <ion-title>Hello, {{user?.Name }}!</ion-title>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="user-details-page">
+  <ion-avatar class="profile-avatar">
+    <img
+      *ngIf="!imageSource"
+      alt="Silhouette of a person's head"
+      src="https://ionicframework.com/docs/img/demos/avatar.svg"
+    />
+    <img
+      *ngIf="imageSource"
+      [src]="'data:image/jpg;base64,' + imageSource"
+      style="width: 400px"
+    />
+  </ion-avatar>
+  <div align="center">
+    <ion-button
+      fill="clear"
+      color="medium"
+      class="take-photo-button"
+      (click)="takeProfilePhoto()"
+    >
+      Take Photo
+    </ion-button>
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-text>{{user?.Name }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-text>{{ user?.Email }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Address:</ion-label>
+        <ion-text>{{ user?.Address }}</ion-text>
+      </ion-item>
+
+      <div align="center">
+        <ion-button fill="clear" color="danger" (click)="logout()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          Logout
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

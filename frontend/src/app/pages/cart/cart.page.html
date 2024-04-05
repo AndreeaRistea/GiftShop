@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="backbtn" routerLink="/home" routerDirection="back">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+      <ion-title>Cart</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of cartItems">
+      <ion-thumbnail slot="start">
+        <img [src]="'data:image/jpg;base64,' +product.Product?.Image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h1>{{ product.Product?.Name }}</h1>
+        <p>Description: {{ product.Product?.Description }}</p>
+        <p>Price: {{ product.Product?.Price }}</p>
+        <p>Quantity: {{product.Quantity}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

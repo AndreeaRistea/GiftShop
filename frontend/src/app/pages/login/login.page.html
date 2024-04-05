@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <div class="backbtn" routerLink="" routerDirection="back">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <div class="title">Moments Gift Corner</div>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container">
+    <h1>Login</h1>
+
+    <div class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="expand">Email </ion-label>
+          <ion-input formControlName="username" type="email"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        >
+          <ion-text color="danger" slot="end"> Email is required! </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="expand">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+          <ion-text color="danger" slot="end"> Password is required! </ion-text>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
+          Log in
+        </ion-button>
+        <div class="sign-up">
+          Don't have an account?
+          <ion-button
+            color="dark"
+            fill="clear"
+            routerLink="/signup"
+            routerDirection="forward"
+            >Sign up</ion-button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
