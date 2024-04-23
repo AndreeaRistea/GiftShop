@@ -24,7 +24,6 @@ namespace GiftShopOnline.Entities
         public IFormFile ImageFile { get; set; }
 
         public CartItem? CartItem { get; set; }
-
         public ICollection<Wishlist>? Wishlists { get; set; }
 
         public Guid? CategoryId {  get; set; }

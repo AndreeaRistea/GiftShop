@@ -16,4 +16,21 @@ export class WishlistPage implements OnInit {
       this.products = products;
     });
   }
+
+  // removeFromCart(cartItemId: string) {
+  //   this.cartItemService.removeFromCart(cartItemId).subscribe(() =>
+  //     this.cartItemService.getAllCartItems().subscribe((cartItems) => {
+  //       this.cartItems = cartItems;
+  //       this.calculateTotalPrice();
+  //     })
+  //   );
+  // }
+
+  removeFromWishlist(productId: string) {
+    this.wishlistService.removeFromWislist(productId).subscribe(() =>
+      this.wishlistService.getProductInWishList().subscribe((products) => {
+        this.products = products;
+      })
+    );
+  }
 }

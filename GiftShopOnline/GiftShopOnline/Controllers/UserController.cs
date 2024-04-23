@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using GiftShopOnline.Models.User;
 using GiftShopOnline.Helpers;
 using GiftShopOnline.Data;
-using Microsoft.EntityFrameworkCore;
-using GiftShopOnline.Entities;
-using GiftShopOnline.Models.Product;
 
 namespace GiftShopOnline.Controllers;
 

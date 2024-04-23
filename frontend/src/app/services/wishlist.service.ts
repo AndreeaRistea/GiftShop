@@ -16,4 +16,8 @@ export class WishlistService {
   addToWishlist(productId: string): Observable<ProductDto> {
     return this.httpService.post('Wishlist', { productid: productId });
   }
+
+  removeFromWislist(productId: string): Observable<any> {
+    return this.httpService.delete(`Wishlist/${productId}`, productId);
+  }
 }

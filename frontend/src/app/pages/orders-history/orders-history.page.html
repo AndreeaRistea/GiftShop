@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Order History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card
+      button
+      *ngFor="let order of orders"
+      (click)="orderDetails(order.Id)"
+    >
+      <ion-card-header>
+        <ion-card-title
+          >Order Date: {{ order.OrderDate | date }}</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <p>Order Status: {{ OrderStatus[order.OrderStatus] }}</p>
+        <p>Total Amount: ${{ order.TotalAmount }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noOrders>
+    <ion-text>
+      <p>No orders found.</p>
+    </ion-text>
+  </ng-template>
+</ion-content>

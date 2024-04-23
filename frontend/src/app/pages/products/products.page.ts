@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartItemDto } from 'src/app/models/cartItemDto';
 import { ProductDto } from 'src/app/models/productDto';
 import { CartItemService } from 'src/app/services/cartItem.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -32,12 +33,19 @@ export class ProductsPage implements OnInit {
   }
   addToCart(productId: any) {
     console.log(productId);
-    this.cartItemService.addCartItems(productId).subscribe();
-    this.router.navigate(['cart']);
+    this.cartItemService.addCartItems(productId).subscribe(() => {
+      this.cartItemService.getAllCartItems().subscribe(() => {
+        this.router.navigate(['cart']);
+      });
+    });
   }
   addToWishlist(productId: any) {
     console.log(productId);
-    this.wishlistService.addToWishlist(productId).subscribe();
-    this.router.navigate(['wishlist']);
+    this.wishlistService.addToWishlist(productId).subscribe(() => {
+      this.wishlistService.getProductInWishList().subscribe(() => {
+        this.router.navigate(['wishlist']);
+      });
+    });
+    //this.router.navigate(['wishlist']);
   }
 }

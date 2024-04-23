@@ -1,4 +1,4 @@
-﻿namespace GiftShopOnline.Models.CartItem
+﻿namespace GiftShopOnline.Models.CartItems
 {
     public class CreateCartItemDto
     {

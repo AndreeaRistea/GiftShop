@@ -42,15 +42,34 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () =>
+      import('./pages/cart/cart.module').then((m) => m.CartPageModule),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfilePageModule),
   },
   {
     path: 'wishlist',
-    loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
+    loadChildren: () =>
+      import('./pages/wishlist/wishlist.module').then(
+        (m) => m.WishlistPageModule
+      ),
+  },
+  {
+    path: 'orders-history',
+    loadChildren: () =>
+      import('./pages/orders-history/orders-history.module').then(
+        (m) => m.OrdersHistoryPageModule
+      ),
+  },
+  {
+    path: 'order-details/:orderId',
+    loadChildren: () =>
+      import('./pages/order-details/order-details.module').then(
+        (m) => m.OrderDetailsPageModule
+      ),
   },
 ];
 @NgModule({

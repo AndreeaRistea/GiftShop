@@ -13,6 +13,8 @@ public class UnitOfWork : DbContext
    // public DbSet<Cart> Carts { get; set; }  
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<Wishlist> Wishlist { get; set; }
+    //public DbSet <OrderItem> OrderItems { get; set; }
+    public DbSet <Order> Orders { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -33,6 +35,11 @@ public class UnitOfWork : DbContext
             .HasOne(e => e.Product)
             .WithOne(e => e.CartItem)
             .HasForeignKey<CartItem>(e => e.ProductId);
+
+        modelBuilder.Entity<Order>()
+           .HasMany(ci => ci.OrderItems)
+           .WithOne(o => o.Order)
+           .HasForeignKey(ci => ci.OrderId);
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿using GiftShopOnline.Data;
 using GiftShopOnline.Entities;
 using GiftShopOnline.Helpers;
-using GiftShopOnline.Models.Product;
+using GiftShopOnline.Models.Products;
 using GiftShopOnline.Models.Wishlist;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -77,21 +77,11 @@ namespace GiftShopOnline.Controllers
             wishlist.Products = wishlist.Products.ToList();
 
 
-            var productDtos = wishlist.Products.Select(prod => new ProductDto
-            {
-                Id = prod.Id,
-                Name = prod.Name,
-                Price = prod.Price,
-                Stock = prod.Stock,
-                Description = prod.Description,
-                Image = prod.Image,
-                CategoryId = prod.CategoryId.Value,
-                CategoryName = prod.Category.CategoryName,
-            }).ToList();
+            var productDtos = wishlist.Products.Select(ProductDto.FromEntity).ToList();
             return Ok(productDtos);
         }
 
-        [HttpDelete] 
+        [HttpDelete("{productId}")] 
         public async Task<IActionResult> RemoveFromWishlist(Guid productId)
         {
             var user = _currentUser.Id;

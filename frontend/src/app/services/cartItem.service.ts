@@ -19,4 +19,18 @@ export class CartItemService {
       quantity: quantity,
     });
   }
+
+  updateQuantity(
+    cartItemId: string,
+    newQuantity: number
+  ): Observable<CartItemDto> {
+    return this.httpService.post(`CartItem/updateQuantity/${cartItemId}`, {
+      cartItemId: cartItemId,
+      newQuantity: newQuantity,
+    });
+  }
+
+  removeFromCart(productId: string): Observable<any> {
+    return this.httpService.delete(`CartItem/${productId}`, productId);
+  }
 }

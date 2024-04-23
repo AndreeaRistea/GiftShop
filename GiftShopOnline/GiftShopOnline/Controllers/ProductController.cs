@@ -1,8 +1,6 @@
 ﻿using GiftShopOnline.Data;
 using GiftShopOnline.Entities;
-using GiftShopOnline.Models.Product;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using GiftShopOnline.Models.Products;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,17 +40,7 @@ namespace GiftShopOnline.Controllers
         public async Task<ActionResult<ProductDto>> GetProductsByCategory (Guid categoryId)
         {
             var products = await _uow.Products.Include(prod=>prod.Category).Where(prod => prod.CategoryId == categoryId).ToListAsync();
-            var productDtos = products.Select(prod => new ProductDto
-            {
-                Id = prod.Id,
-                Name = prod.Name,
-                Price = prod.Price,
-                Stock = prod.Stock,
-                Description = prod.Description,
-                Image = prod.Image,
-                CategoryId = categoryId,
-                CategoryName = prod.Category.CategoryName,
-            }).ToList();
+            var productDtos = products.Select(ProductDto.FromEntity).ToList();
             return Ok(productDtos);
         }
 

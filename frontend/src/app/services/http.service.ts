@@ -31,4 +31,15 @@ export class HttpService {
       headers: headers,
     });
   }
+
+  delete<T>(url: string, data: any) {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.append('Authorization', `Bearer ${token}`);
+    }
+    return this.httpClient.delete<T>(this.apiUrl + url, {
+      headers: headers,
+    });
+  }
 }

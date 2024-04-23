@@ -24,10 +24,9 @@ public class User
 
     public DateTime TokenExpires { get; set; }
 
-    //public Guid? CartId { get; set; }
-
-    //public virtual Cart? Cart { get; set; }
     public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public Guid? WishlistId {  get; set; }
 

@@ -1,9 +1,8 @@
 ﻿using GiftShopOnline.Data;
 using GiftShopOnline.Entities;
 using GiftShopOnline.Helpers;
-using GiftShopOnline.Models.CartItem;
-using GiftShopOnline.Models.Product;
-using Microsoft.AspNetCore.Http;
+using GiftShopOnline.Models.CartItems;
+using GiftShopOnline.Models.Products;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -98,32 +97,62 @@ namespace GiftShopOnline.Controllers
             return Ok(cartItemDtos);
         }
 
-        [HttpPost("updateQuantity /{cartItemId}")]
-        public async Task<IActionResult> UpdateQuantity (Guid cartItemId, int newQuantity)
+        //[HttpPost("updateQuantity/{cartItemId}")]
+        //public async Task<IActionResult> UpdateQuantity ([FromBody] CartItemUpdateDto cartItemDto)
+        //{
+        //    var userId = _currentUser.Id;
+
+        //    //var cartItem = await _uow.CartItems.FirstOrDefaultAsync(c => c.Id == cartItemId && c.UserId == userId);
+        //    var cartItem = await _uow.CartItems.FindAsync(cartItemDto.CartItemId);
+
+        //    if (cartItem == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if(cartItem.Quantity + cartItemDto.NewQuantity > 1) 
+        //    {
+        //        cartItem.Quantity += cartItemDto.NewQuantity;
+        //        await _uow.SaveChangesAsync();
+        //        return Ok(cartItem);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //}
+
+        [HttpPost("updateQuantity/{cartItemId}")]
+        public async Task<IActionResult> UpdateQuantity([FromBody] CartItemUpdateDto cartItemDto)
         {
             var userId = _currentUser.Id;
 
-            var cartItem = await _uow.CartItems.FirstOrDefaultAsync(c => c.Id == cartItemId && c.UserId == userId);
+            // Găsește cartItem după cartItemId și userId
+            var cartItem = await _uow.CartItems.FirstOrDefaultAsync(c => c.Id == cartItemDto.CartItemId && c.UserId == userId);
 
             if (cartItem == null)
             {
                 return NotFound();
             }
 
-            if(cartItem.Quantity + newQuantity > 1) 
+            // Verificați dacă noua cantitate este validă și pozitivă
+            if (cartItemDto.NewQuantity <= 0)
             {
-                cartItem.Quantity += newQuantity;
-                await _uow.SaveChangesAsync();
-                return Ok(cartItem);
-            }
-            else
-            {
-                return BadRequest();
+                return BadRequest("Invalid quantity. Quantity must be greater than 0.");
             }
 
+            // Actualizați cantitatea articolului
+            cartItem.Quantity = cartItemDto.NewQuantity;
+
+            await _uow.SaveChangesAsync();
+
+            // Returnați cartItem actualizat
+            return Ok(cartItem);
         }
 
-        [HttpDelete]
+
+        [HttpDelete("{cartItemId}")]
         public async Task<IActionResult> RemoveItem (Guid cartItemId)
         {
             var userId = _currentUser.Id;
